@@ -8,9 +8,7 @@
         <li class="nav-item d-none d-sm-inline-block">
           <a href="/depart_ward" class="nav-link">View Discharged Patient List</a>
         </li>
-        <li class="nav-item d-none d-sm-inline-block">
-          <a href="/depart_ward/create" class="nav-link">Discharge Patient</a>
-        </li>
+    
     </ul>
     
     

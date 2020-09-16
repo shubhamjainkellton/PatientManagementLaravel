@@ -9,9 +9,7 @@
         <li class="nav-item d-none d-sm-inline-block">
           <a href="/depart_ward" class="nav-link">View Discharged Patient List</a>
         </li>
-        <li class="nav-item d-none d-sm-inline-block">
-          <a href="/depart_ward/create" class="nav-link">Discharge Patient</a>
-        </li>
+
     </ul>
     <div class="col-md-4">
     <form action="/depart_ward/search" method="get">

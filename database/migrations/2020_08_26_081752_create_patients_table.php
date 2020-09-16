@@ -22,7 +22,7 @@ class CreatePatientsTable extends Migration
             $table->string('gender');
             $table->integer('age');
             $table->string('blood_grp');
-            $table->dateTime('dob');
+            $table->date('dob');
             $table->timestamps();
             
         });

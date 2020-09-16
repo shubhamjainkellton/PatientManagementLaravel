@@ -51,6 +51,7 @@
                     <th scope="col">Patient Name</th>
                     <th scope="col">Ward Type</th>
                     <th scope="col">Doctor Name</th>
+                    <th scope="col">Discharge Patient</th>
                     @if(session('role_id')===1) <th scope="colspan = 2">Actions</th> @endif
                   </tr>
                 </thead>
@@ -63,7 +64,10 @@
                     <th scope="row">{{++$i}}</th>
                     <td>{{$wardadmit->patient_name}}</td>
                     <td>{{$wardadmit->ward_type}}</td>
-                    <td>{{$wardadmit->doc_name}}</td>
+                    <td>{{$wardadmit->doc_name}}</td> 
+                    <td>
+                      <a href="depart_ward/{{$wardadmit->id}}/create" class='update btn btn-warning btn-sm'><span class="glyphicon glyphicon-minus-sign"></span></a>
+                    </td>
                     @if(session('role_id') === 1)
                     <td>
                       <a href="admit_ward/{{$wardadmit->id}}/edit" class='update btn btn-warning btn-sm'><span class="glyphicon glyphicon-pencil"></span></a>
@@ -88,5 +92,6 @@
         </div>
       </div>
   </div>
+</div>
 </section>
 @endsection

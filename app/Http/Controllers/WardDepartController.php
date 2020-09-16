@@ -9,27 +9,7 @@ use Illuminate\Support\Facades\Validator;
 
 class WardDepartController extends Controller
 {
-    public function create(){
-        $patients = DB::select('select * from wards where status = 0' , [1]);
-        return view('depart_ward/create', ['patients'=> $patients]);
-    }
-    public function store( ){
-
-        $this->validateWard();
-        $warddepart = new Ward;
-        $warddepart->patient_name = request()->get('patient_name');
-        $warddepart->doc_name = request()->get('doc_name');
-        $warddepart->department = request()->get('department');
-        $warddepart->ward_type = request()->get('ward_type');
-        $warddepart->bed_no = request()->get('bed_no');
-        $warddepart->No_of_days = request()->get('No_of_days');
-        $warddepart->charges = request()->get('charges');
-        $warddepart->date = request()->get('date');
-        $warddepart->status = request()->input('status', 1);
-        $warddepart->save();
-        return redirect('/depart_ward')->with('success', 'Patient departed successfully');
-
-    }
+    
     public function index(){
 
         $warddepart = DB::table('wards')->latest()->paginate(20);

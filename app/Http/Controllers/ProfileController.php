@@ -26,22 +26,11 @@ class ProfileController extends Controller
 
     public function update(Request $request, User $user){
 
-        $current_password = $request->get('current_password');
-         
-        if(!Hash::check($current_password, $user->password))
-        { 
-           return back()->with('error', 'Your current password does not match with what you provided');
-        }
-        else
-        {
-            if(strcmp($current_password, $request->get('new_password')) == 0)
-          {
-            return back()->with('error', 'Your current password can not be same with the new password');
-          }
+
         
         $request->validate([
             'current_password' => 'required',
-            'new_password' => 'required|min:6|confirmed'
+            'new_password' => 'required|min:6|confirmed|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
         ]);
         
         $user->update([
@@ -52,10 +41,8 @@ class ProfileController extends Controller
             'password' => Hash::make($request->get('new_password')),
         ]);
           
-            dd($user->update());
         return redirect('/profile')->with('success', 'Profile updated successfully');  
             
-        }
         
         
     } 

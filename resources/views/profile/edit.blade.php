@@ -112,7 +112,8 @@
                         <input type="password"
                         class="form-control"
                          name="current_password" 
-                         id="current_password">
+                         id="current_password"
+                        value="{{ $user->password}}">
                 </div> 
                 <br>
 				<div class="form-group">

@@ -32,6 +32,34 @@ class WardController extends Controller
 
         return redirect('/admit_ward')->with('success', 'Patient admitted successfully');
     }
+
+    public function warddepart(Ward $wardadmit){
+
+        return view('depart_ward.create',['wardadmit'=>$wardadmit]);
+
+
+    }
+    public function wardstore(Ward $wardadmit){
+
+        $wardadmit->update([
+            'patient_name' => request()->get('patient_name'),
+            'doc_name' => request()->get('doc_name'),
+            'department' => request()->get('department'),
+            'ward_type' => request()->get('ward_type'),
+            'bed_no' => request()->get('bed_no'),
+            'No_of_days' => request()->get('No_of_days'),
+            'charges' => request()->get('charges'),
+            'date' => request()->get('date'),
+            'status' => request()->input('status', 1),
+
+        ]);
+
+        return redirect('/depart_ward')->with('success', 'Patient departed successfully');;
+
+
+    }
+    
+
     public function index(){
         
         $wardadmit = DB::table('wards')->latest()->paginate(20);

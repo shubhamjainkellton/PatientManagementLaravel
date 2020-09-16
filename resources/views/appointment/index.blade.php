@@ -7,15 +7,14 @@
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="/appointment" class="nav-link">View Appointment List</a>
+          <a href="/admit_ward" class="nav-link">View Admitted Patient List</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="/appointment/create" class="nav-link">Add Appointment</a>
+          <a href="/admit_ward/create" class="nav-link">Admit Patient</a>
         </li>
-        
     </ul>
     <div class="col-md-4">
-    <form action="/appointment/search" method="get">
+    <form action="/admit_ward/search" method="get">
       <div class="input-group">
         <input type="search" name="search" class="form-control">
         <span class="input-group-btn">
@@ -41,7 +40,7 @@
           <div class="col-auto">
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Appointment List</h3>
+                <h3 class="card-title">Admitted Patient List</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
@@ -50,32 +49,32 @@
                   <tr>
                     <th scope="col">S. No.</th>
                     <th scope="col">Patient Name</th>
+                    <th scope="col">Ward Type</th>
                     <th scope="col">Doctor Name</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Time</th>
-                    
+                    <th scope="col">Discharge Patient</th>
                     @if(session('role_id')===1) <th scope="colspan = 2">Actions</th> @endif
                   </tr>
                 </thead>
                 <tbody>
                   
-                  @foreach($appointments as $appointment)
-                  
+                  @foreach($wardadmits ?? '' as $wardadmit)
+                  @if($wardadmit->status === 0)
                   <tr>
                     
                     <th scope="row">{{++$i}}</th>
-                    <td>{{$appointment->patient_name}}</td>
-                    <td>{{$appointment->doc_name}}</td>
-                    <td>{{$appointment->date}}</td>
-                    <td>{{$appointment->time}}</td>
-                    
+                    <td>{{$wardadmit->patient_name}}</td>
+                    <td>{{$wardadmit->ward_type}}</td>
+                    <td>{{$wardadmit->doc_name}}</td> 
+                    <td>
+                      <a href="depart_ward/{{$wardadmit->id}}/create" class='update btn btn-warning btn-sm'><span class="glyphicon glyphicon-minus-sign"></span></a>
+                    </td>
                     @if(session('role_id') === 1)
                     <td>
-                      <a href="appointment/{{$appointment->id}}/edit" class='update btn btn-warning btn-sm'><span class="glyphicon glyphicon-pencil"></span></a>
+                      <a href="admit_ward/{{$wardadmit->id}}/edit" class='update btn btn-warning btn-sm'><span class="glyphicon glyphicon-pencil"></span></a>
                     </td>  
                     
                     <td>
-                    <form action="appointment/{{$appointment->id}}" method="POST">
+                    <form action="admit_ward/{{$wardadmit->id}}" method="POST">
                       @csrf
                       @method('DELETE')
                       <button class="delete btn btn-danger btn-sm" type="submit"><span class="glyphicon glyphicon-trash"></span></button> 
@@ -83,17 +82,16 @@
                     </td>
                     @endif
                   </tr>
-                  
+                  @endif
                   @endforeach
-                
                 </tbody>
               </table>
-              </div>
               <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
           </div>
+            <!-- /.card -->
+        </div>
       </div>
   </div>
+</div>
 </section>
 @endsection
